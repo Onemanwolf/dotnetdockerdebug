@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "5rXV/odphCcbPJPxdUiKVYFBEAm0JoQNN7aDpoF/gvc=",
+  "Source": "docker.api",
+  "BasePath": "_content/docker.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

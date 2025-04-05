@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker-run: debug",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-d",
+        "--name",
+        "docker.api.debug",
+        "-p",
+        "5264:5264",
+        "--env",
+        "ASPNETCORE_ENVIRONMENT=Development",
+        "--env",
+        "DOTNET_USE_POLLING_FILE_WATCHER=1",
+        "docker.api:dev"
+      ],
+      "dependsOn": ["docker-build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "docker-build",
+      "type": "docker-build",
+      "dockerBuild": {
+        "tag": "docker.api:dev",
+        "dockerfile": "${workspaceFolder}/docker.api/Dockerfile",
+        "context": "${workspaceFolder}"
+      }
+    },
+    {
+      "label": "docker-stop: debug",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "stop",
+        "docker.api.debug"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "docker-rm: debug"
+      ]
+    },
+    {
+      "label": "docker-rm: debug",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "rm",
+        "-f",
+        "docker.api.debug"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}

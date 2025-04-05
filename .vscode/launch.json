@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker .NET Attach",
+      "type": "docker",
+      "request": "attach",
+      "preLaunchTask": "docker-run: debug",
+      "postDebugTask": "docker-stop: debug",
+      "netCore": {
+        "appProject": "${workspaceFolder}/docker.api/docker.api.csproj",
+        "debuggerPath": "/remote_debugger/vsdbg",
+        "appPath": "/app/docker.api.dll"
+      },
+      "containerName": "docker.api.debug",
+      "platform": "netcore",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": [
+          "exec",
+          "-i",
+          "docker.api.debug",
+          "/remote_debugger/vsdbg",
+          "--interpreter=vscode",
+          "--",
+          "/app/docker.api.dll"
+        ],
+        "debuggerPath": "/remote_debugger/vsdbg",
+        "pipeCwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
